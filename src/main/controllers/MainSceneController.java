@@ -25,8 +25,10 @@ public class MainSceneController extends ParentController {
     @FXML
     public void newEventPressed(ActionEvent event) throws Exception{
         Pane newPane = FXMLLoader.load(getClass().getResource("/resources/Event.fxml"));
+        eventsArray.add(individualEvent);
         contentBox.getChildren().addAll(newPane);
         newPane.prefWidthProperty().bind(scrollPane.widthProperty());
         scrollPane.setContent(contentBox);
+        individualEvent.getTimeLeftField().appendText("5 Hours");
     }
 }
