@@ -11,5 +11,7 @@ public class ParentController {
 
     public static EventController individualEvent;
 
+    public static NewEventController newEvent;
+
     public static ArrayList<EventController> eventsArray = new ArrayList<>();
 }
