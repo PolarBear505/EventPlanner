@@ -7,3 +7,4 @@ Still to Implement:
 * Events display Date and Time due
 * Events display time left till due date
 * Events are displayed in order
+* More features coming....
