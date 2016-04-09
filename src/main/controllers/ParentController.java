@@ -14,4 +14,6 @@ public class ParentController {
     public static NewEventController newEvent;
 
     public static ArrayList<EventController> eventsArray = new ArrayList<>();
+
+    public static Boolean addEvent = false;
 }

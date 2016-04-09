@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.NewEventController">
    <children>
       <Text layoutX="25.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Event" wrappingWidth="151.13671875">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Text>
+      <HBox layoutY="50.0" prefHeight="350.0" prefWidth="350.0">
+         <children>
+            <VBox maxHeight="350.0" prefHeight="400.0" prefWidth="175.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title:" translateX="25.0" translateY="10.0" wrappingWidth="152.13671875">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox maxHeight="350.0" prefHeight="350.0" prefWidth="175.0">
+               <children>
+                  <TextField fx:id="titleInputField" maxWidth="160.0" translateY="10.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="acceptButton" layoutX="257.0" layoutY="411.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="25.0" prefWidth="79.0" text="Accept" />
+      <Button fx:id="cancelButton" layoutX="14.0" layoutY="411.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="25.0" prefWidth="79.0" text="Cancel" />
    </children>
 </AnchorPane>

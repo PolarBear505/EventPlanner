@@ -13,7 +13,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Title of the Event" wrappingWidth="263.13671875">
+      <Text fx:id="eventTitle" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Title of the Event" wrappingWidth="263.13671875">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
