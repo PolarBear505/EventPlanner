@@ -13,10 +13,11 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="eventTitle" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Title of the Event" wrappingWidth="263.13671875">
+      <Text fx:id="eventTitle" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" wrappingWidth="263.13671875">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Text>
+      <Button fx:id="deleteButton" layoutX="284.0" layoutY="11.0" mnemonicParsing="false" onAction="#buttonPressed" text="Delete" />
    </children>
 </AnchorPane>

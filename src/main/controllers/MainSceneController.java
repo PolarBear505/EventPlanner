@@ -9,9 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Adam on 24/03/2016.
@@ -32,7 +35,7 @@ public class MainSceneController extends ParentController {
     }
 
     @FXML
-    public void newEventPressed(ActionEvent event) throws Exception{
+    public void newEventPressed(ActionEvent event) throws Exception {
 
         Stage stage;
         Parent root;
@@ -55,7 +58,9 @@ public class MainSceneController extends ParentController {
 
         if (addEvent) {
             Pane newPane = FXMLLoader.load(getClass().getResource("/resources/Event.fxml"));
-            eventsArray.add(individualEvent);
+            int eventID = generateID();
+            individualEvent.setEventID(eventID);
+            eventsDict.put(eventID, individualEvent);
             contentBox.getChildren().addAll(newPane);
             newPane.prefWidthProperty().bind(scrollPane.widthProperty());
             scrollPane.setContent(contentBox);
@@ -63,5 +68,23 @@ public class MainSceneController extends ParentController {
             individualEvent.getTimeLeftField().appendText("5 Hours");
             addEvent = false;
         }
+    }
+
+    public void refreshEvents() throws Exception {
+        Collection<EventController> allEvents = eventsDict.values();
+        eventsDict = new HashMap<>();
+        contentBox = new VBox();
+        for (EventController event : allEvents) {
+            Pane newPane = FXMLLoader.load(getClass().getResource("/resources/Event.fxml"));
+            int eventID = generateID();
+            individualEvent.setEventID(eventID);
+            eventsDict.put(eventID, individualEvent);
+            contentBox.getChildren().addAll(newPane);
+            newPane.prefWidthProperty().bind(scrollPane.widthProperty());
+            individualEvent.setTitle(event.getEventTitle());
+            individualEvent.getTimeLeftField().appendText("5 Hours");
+            addEvent = false;
+        }
+        scrollPane.setContent(contentBox);
     }
 }
