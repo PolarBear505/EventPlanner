@@ -64,8 +64,8 @@ public class MainSceneController extends ParentController {
             contentBox.getChildren().addAll(newPane);
             newPane.prefWidthProperty().bind(scrollPane.widthProperty());
             scrollPane.setContent(contentBox);
-            individualEvent.setTitle(newEvent.getEventName());
-            individualEvent.getTimeLeftField().appendText("5 Hours");
+            individualEvent.setTitle(newEvent.getEventTitle());
+            individualEvent.setDueDate(newEvent.getEventDate());
             addEvent = false;
         }
     }
@@ -82,7 +82,7 @@ public class MainSceneController extends ParentController {
             contentBox.getChildren().addAll(newPane);
             newPane.prefWidthProperty().bind(scrollPane.widthProperty());
             individualEvent.setTitle(event.getEventTitle());
-            individualEvent.getTimeLeftField().appendText("5 Hours");
+            individualEvent.setDueDate(event.getDueDate());
             addEvent = false;
         }
         scrollPane.setContent(contentBox);
