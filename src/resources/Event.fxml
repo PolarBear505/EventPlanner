@@ -18,7 +18,7 @@
          </font>
       </Text>
       <Button fx:id="deleteButton" layoutX="284.0" layoutY="11.0" mnemonicParsing="false" onAction="#buttonPressed" text="Delete" />
-      <Text fx:id="timeLeftField" layoutX="112.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left" wrappingWidth="98.13671875">
+      <Text fx:id="timeLeftField" layoutX="112.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left" wrappingWidth="228.13671875">
          <font>
             <Font name="System Italic" size="16.0" />
          </font>

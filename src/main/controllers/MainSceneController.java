@@ -66,6 +66,7 @@ public class MainSceneController extends ParentController {
             scrollPane.setContent(contentBox);
             individualEvent.setTitle(newEvent.getEventTitle());
             individualEvent.setDueDate(newEvent.getEventDate());
+            individualEvent.calculateTimeLeft();
             addEvent = false;
         }
     }
