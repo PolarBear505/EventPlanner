@@ -10,7 +10,18 @@ import sun.applet.Main;
 /**
  * Created by Adam on 23/03/2016.
  */
-public class App extends Application{
+public class App extends Application {
+
+    private static App app;
+    private EventUtil eventUtil;
+
+    public App() {
+        app = this;
+    }
+
+    public static App getInstance() {
+        return app;
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -28,5 +39,10 @@ public class App extends Application{
         primaryStage.setMinWidth(400);
         primaryStage.show();
 
+        eventUtil = new EventUtil();
+    }
+
+    public EventUtil getEventUtil() {
+        return eventUtil;
     }
 }

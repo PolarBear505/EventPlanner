@@ -10,25 +10,32 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 
 /**
- * Created by Adam on 25/03/2016.
+ * Controller class for the new event pop up.
  */
-public class NewEventController extends ParentController {
+public class NewEventPopUpController {
 
+    private static NewEventPopUpController newEventPopUpController;
     public String eventName = "";
-
     public LocalDate eventDate;
 
-    @FXML
-    TextField titleInputField;
+    @FXML private TextField titleInputField;
+    @FXML private Button acceptButton;
+    @FXML private DatePicker dateInput;
 
-    @FXML
-    Button acceptButton;
+    /**
+     * Constructor for the new event pop up.
+     */
+    public NewEventPopUpController() {
+        newEventPopUpController = this;
+    }
 
-    @FXML
-    DatePicker dateInput;
-
-    public NewEventController() {
-        newEvent = this;
+    /**
+     * Used to get the instance of the new event popup controller.
+     *
+     * @return The new event popup controller.
+     */
+    public static NewEventPopUpController getInstance() {
+        return newEventPopUpController;
     }
 
     public String getEventTitle() {
@@ -43,7 +50,7 @@ public class NewEventController extends ParentController {
     public void buttonPressed(ActionEvent event) throws Exception{
         Stage stage;
         if (event.getSource().equals(acceptButton)) {
-            addEvent = true;
+            MainSceneController.getInstance().allowAddEvent();
             this.eventName = titleInputField.getText();
             this.eventDate= dateInput.getValue();
             stage=(Stage)acceptButton.getScene().getWindow();

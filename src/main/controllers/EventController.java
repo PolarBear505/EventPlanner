@@ -11,29 +11,25 @@ import java.time.LocalTime;
 import java.time.Period;
 
 /**
- * Created by Adam on 24/03/2016.
+ * Controller class for the event.
  */
-public class EventController extends ParentController{
+public class EventController {
 
-    @FXML
-    private Text eventTitle;
-
-    @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Text dateDueField;
-
-    @FXML
-    private Text timeLeftField;
-
+    private static EventController eventController;
     private int eventID;
-
     private LocalDate dueDate;
 
+    @FXML private Text eventTitle;
+    @FXML private Button deleteButton;
+    @FXML private Text dateDueField;
+    @FXML private Text timeLeftField;
 
     public EventController() {
-        individualEvent = this;
+        eventController = this;
+    }
+
+    public static EventController getInstance() {
+        return eventController;
     }
 
     public String getEventTitle() {
@@ -64,8 +60,8 @@ public class EventController extends ParentController{
 
     public void buttonPressed(ActionEvent event) throws Exception {
         if(event.getSource() == deleteButton) {
-            eventsDict.remove(eventID);
-            mainScene.refreshEvents();
+            MainSceneController.getInstance().getEventsDict().remove(eventID);
+            MainSceneController.getInstance().refreshEvents();
         }
     }
 
