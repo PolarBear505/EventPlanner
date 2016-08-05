@@ -11,4 +11,5 @@ Features in progress:
 * Dynaminc event colouring
 * Prettier UI
 * Quitting and deleting confirmation dialogs
+* Event time picker
 * More features coming....
