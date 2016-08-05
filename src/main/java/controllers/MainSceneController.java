@@ -14,10 +14,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import persistence.EventPersistence;
 
@@ -130,7 +127,15 @@ public class MainSceneController  {
         Collection<EventController> allEvents = eventsMap.values();
 
         for (EventController event : allEvents) {
-            treeMap.put(event.getDateLengthValue(), event);
+            Integer value = event.getDateLengthValue();
+
+            // Ensures duplicates are accounted for
+            while (treeMap.containsKey(value)) {
+                value++;
+            }
+
+            // Add to tree map
+            treeMap.put(value, event);
         }
 
         eventsMap = new HashMap<>();

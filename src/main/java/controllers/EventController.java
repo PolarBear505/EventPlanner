@@ -103,11 +103,11 @@ public class EventController {
 
             // Creates an integer value of time left
             Integer timeLeftInteger = 0;
-            timeLeftInteger += minutes;
-            timeLeftInteger += hours * 60;
-            timeLeftInteger += daysLeft * 24 * 60;
-            timeLeftInteger += monthsLeft * 28 * 24 * 60;
-            timeLeftInteger += yearsLeft * 12 * 28 * 24 * 60;
+            timeLeftInteger += minutes * 1000;
+            timeLeftInteger += hours * 60 * 1000;
+            timeLeftInteger += daysLeft * 24 * 60 * 1000;
+            timeLeftInteger += monthsLeft * 28 * 24 * 60 * 1000;
+            timeLeftInteger += yearsLeft * 12 * 28 * 24 * 60 * 1000;
             dateLengthValue = timeLeftInteger;
         }
     }
