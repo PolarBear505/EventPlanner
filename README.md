@@ -12,4 +12,5 @@ Features in progress:
 * Prettier UI
 * Quitting and deleting confirmation dialogs
 * Event time picker
+* Event groups
 * More features coming....
