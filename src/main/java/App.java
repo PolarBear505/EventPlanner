@@ -1,5 +1,3 @@
-package main;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,7 +33,7 @@ public class App extends Application {
         Integer height = 600;
 
         // Set up the scene
-        URL sceneUrl = getClass().getResource("/resources/MainScene.fxml");
+        URL sceneUrl = getClass().getResource("/MainScene.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(sceneUrl);
         AnchorPane pane = fxmlLoader.load();
         Scene scene = new Scene(pane);

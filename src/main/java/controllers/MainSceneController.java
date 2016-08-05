@@ -1,4 +1,4 @@
-package main.controllers;
+package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,11 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -60,8 +62,12 @@ public class MainSceneController  {
         // Opens the pop up if the new event button is pressed
         if (event.getSource() == newEventButton) {
             stage = new Stage();
-            root = FXMLLoader.load(getClass().getResource("/resources/NewEventPopUp.fxml"));
-            stage.setScene(new Scene(root));
+            URL url = getClass().getResource("/NewEventPopUp.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            AnchorPane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+
+            stage.setScene(scene);
             stage.setTitle("New Event");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(newEventButton.getScene().getWindow());
@@ -78,7 +84,7 @@ public class MainSceneController  {
     public void addEvent(String eventTitle, LocalDate dueDate) {
         try {
             // Create the event
-            Pane newPane = FXMLLoader.load(getClass().getResource("/resources/Event.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/Event.fxml"));
             EventController event = EventController.getInstance();
             Integer eventID = generateID();
 
