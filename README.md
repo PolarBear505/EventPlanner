@@ -1,4 +1,4 @@
-# **EventPlanner**
+# **Event Planner**
 A simple application that lets you keep track of events.
 
 ![Imgur](http://i.imgur.com/NjEzarV.png)
