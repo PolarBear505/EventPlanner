@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,9 +22,9 @@ import java.util.Map;
  */
 public class MainSceneController  {
 
-    public static Map<Integer, EventController> eventsDict = new HashMap<>();
     private static MainSceneController mainSceneController;
-    private Boolean addEvent;
+
+    public static Map<Integer, EventController> eventsMap = new HashMap<>();
 
     @FXML private ScrollPane scrollPane;
     @FXML private VBox contentBox = new VBox();
@@ -52,13 +53,12 @@ public class MainSceneController  {
      * @throws Exception The fxml cant be loaded.
      */
     @FXML
-    public void newEventPressed(ActionEvent event) throws Exception {
-
+    public void buttonPressed(ActionEvent event) throws Exception {
         Stage stage;
         Parent root;
 
-        if(event.getSource()==newEventButton)
-        {
+        // Opens the pop up if the new event button is pressed
+        if (event.getSource() == newEventButton) {
             stage = new Stage();
             root = FXMLLoader.load(getClass().getResource("/resources/NewEventPopUp.fxml"));
             stage.setScene(new Scene(root));
@@ -66,64 +66,70 @@ public class MainSceneController  {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(newEventButton.getScene().getWindow());
             stage.showAndWait();
-        }
-        else
-        {
+        } else {
             stage=(Stage)newEventButton.getScene().getWindow();
             stage.close();
-        }
-
-        if (addEvent) {
-            Pane newPane = FXMLLoader.load(getClass().getResource("/resources/Event.fxml"));
-            int eventID = generateID();
-            EventController.getInstance().setEventID(eventID);
-            eventsDict.put(eventID, EventController.getInstance());
-            contentBox.getChildren().addAll(newPane);
-            newPane.prefWidthProperty().bind(scrollPane.widthProperty());
-            scrollPane.setContent(contentBox);
-            EventController.getInstance().setTitle(NewEventPopUpController.getInstance().getEventTitle());
-            EventController.getInstance().setDueDate(NewEventPopUpController.getInstance().getEventDate());
-            EventController.getInstance().calculateTimeLeft();
-            addEvent = false;
         }
     }
 
     /**
-     * Function used to refresh events.
-     *
-     * @throws Exception The fxml can't be loaded.
+     * Used to add an event to the main scene.
      */
-    public void refreshEvents() throws Exception {
-        Collection<EventController> allEvents = eventsDict.values();
-        eventsDict = new HashMap<>();
-        contentBox = new VBox();
-        for (EventController event : allEvents) {
+    public void addEvent(String eventTitle, LocalDate dueDate) {
+        try {
+            // Create the event
             Pane newPane = FXMLLoader.load(getClass().getResource("/resources/Event.fxml"));
-            int eventID = generateID();
-            EventController.getInstance().setEventID(eventID);
-            eventsDict.put(eventID, EventController.getInstance());
+            EventController event = EventController.getInstance();
+            Integer eventID = generateID();
+
+            // Set event attributes
+            event.setEventID(eventID);
+            event.setTitle(eventTitle);
+            event.setDueDate(dueDate);
+            event.calculateTimeLeft();
+
+            // Add event to scroll pane
+            eventsMap.put(eventID, EventController.getInstance());
             contentBox.getChildren().addAll(newPane);
             newPane.prefWidthProperty().bind(scrollPane.widthProperty());
-            EventController.getInstance().setTitle(event.getEventTitle());
-            EventController.getInstance().setDueDate(event.getDueDate());
-            addEvent = false;
+            scrollPane.setContent(contentBox);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        scrollPane.setContent(contentBox);
     }
 
-    public void allowAddEvent() {
-        addEvent = true;
-    }
-
-    public static int generateID(){
+    /**
+     * Generates a unique ID number for an event in the events map.
+     *
+     * @return The ID number.
+     */
+    private Integer generateID(){
         int idNumber = 0;
-        while (eventsDict.containsKey(idNumber)) {
+        while (eventsMap.containsKey(idNumber)) {
             idNumber++;
         }
         return idNumber;
     }
 
-    public Map getEventsDict() {
-        return eventsDict;
+    /**
+     * Function used to refresh events.
+     */
+    public void refreshEvents() {
+        Collection<EventController> allEvents = eventsMap.values();
+        eventsMap = new HashMap<>();
+        contentBox = new VBox();
+        for (EventController event : allEvents) {
+            addEvent(event.getEventTitle(), event.getDueDate());
+        }
+        scrollPane.setContent(contentBox);
+    }
+
+    /**
+     * Used to remove a specific event from the events map.
+     *
+     * @param idNumber The ID number of the event.
+     */
+    public void removeEventFromMap(Integer idNumber) {
+        eventsMap.remove(idNumber);
     }
 }

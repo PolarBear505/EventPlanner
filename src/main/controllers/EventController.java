@@ -60,7 +60,7 @@ public class EventController {
 
     public void buttonPressed(ActionEvent event) throws Exception {
         if(event.getSource() == deleteButton) {
-            MainSceneController.getInstance().getEventsDict().remove(eventID);
+            MainSceneController.getInstance().removeEventFromMap(eventID);
             MainSceneController.getInstance().refreshEvents();
         }
     }

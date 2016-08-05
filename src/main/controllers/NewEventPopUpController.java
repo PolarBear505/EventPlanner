@@ -14,47 +14,29 @@ import java.time.LocalDate;
  */
 public class NewEventPopUpController {
 
-    private static NewEventPopUpController newEventPopUpController;
-    public String eventName = "";
-    public LocalDate eventDate;
-
     @FXML private TextField titleInputField;
     @FXML private Button acceptButton;
     @FXML private DatePicker dateInput;
 
     /**
-     * Constructor for the new event pop up.
-     */
-    public NewEventPopUpController() {
-        newEventPopUpController = this;
-    }
-
-    /**
-     * Used to get the instance of the new event popup controller.
+     * Handles any button being pressed on the pop up.
      *
-     * @return The new event popup controller.
+     * @param event The action event.
      */
-    public static NewEventPopUpController getInstance() {
-        return newEventPopUpController;
-    }
-
-    public String getEventTitle() {
-        return eventName;
-    }
-
-    public LocalDate getEventDate() {
-        return eventDate;
-    }
-
     @FXML
-    public void buttonPressed(ActionEvent event) throws Exception{
+    public void buttonPressed(ActionEvent event) {
         Stage stage;
         if (event.getSource().equals(acceptButton)) {
-            MainSceneController.getInstance().allowAddEvent();
-            this.eventName = titleInputField.getText();
-            this.eventDate= dateInput.getValue();
+            // Gets the data from the pop up
+            String eventName = titleInputField.getText();
+            LocalDate eventDate= dateInput.getValue();
+
+            // Closes the pop up
             stage=(Stage)acceptButton.getScene().getWindow();
             stage.close();
+
+            // Tells the main scene controller to add the event
+            MainSceneController.getInstance().addEvent(eventName, eventDate);
         } else {
             stage=(Stage)acceptButton.getScene().getWindow();
             stage.close();
