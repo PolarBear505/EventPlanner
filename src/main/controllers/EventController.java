@@ -11,12 +11,13 @@ import java.time.LocalTime;
 import java.time.Period;
 
 /**
- * Controller class for the event.
+ * Controller class for an event.
  */
 public class EventController {
 
     private static EventController eventController;
-    private int eventID;
+
+    private Integer eventID;
     private LocalDate dueDate;
 
     @FXML private Text eventTitle;
@@ -24,54 +25,44 @@ public class EventController {
     @FXML private Text dateDueField;
     @FXML private Text timeLeftField;
 
+    /**
+     * Constructor for the class.
+     */
     public EventController() {
         eventController = this;
     }
 
+    /**
+     * Static method used to retrieve the instance of the class.
+     *
+     * @return The class instance.
+     */
     public static EventController getInstance() {
         return eventController;
     }
 
-    public String getEventTitle() {
-        return eventTitle.getText();
-    }
-
-    public void setTitle(String text) {
-        eventTitle.setText(text);
-    }
-
-    public void setEventID(int ID) {
-        eventID = ID;
-    }
-
-    public void setDueDate(LocalDate date) {
-        dueDate = date;
-        int day = date.getDayOfMonth();
-        int month = date.getMonthValue();
-        int year = date.getYear();
-        String theDate = "";
-        theDate = theDate.concat(day + "/" + month + "/" + year);
-        dateDueField.setText(theDate);
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void buttonPressed(ActionEvent event) throws Exception {
+    /**
+     * Handles a button being pressed on the event.
+     *
+     * @param event The action event.
+     */
+    @FXML
+    public void buttonPressed(ActionEvent event) {
         if(event.getSource() == deleteButton) {
             MainSceneController.getInstance().removeEventFromMap(eventID);
             MainSceneController.getInstance().refreshEvents();
         }
     }
 
+    /**
+     * Calculates the time left and adds it to the time left text field.
+     */
     public void calculateTimeLeft() {
         //The two local date times;
         LocalDateTime dueDateTime = dueDate.atStartOfDay();
         LocalDateTime currentDateTime = LocalDateTime.now();
 
         if (dueDateTime.isAfter(currentDateTime)) {
-
             //The two local dates
             LocalDate dueDate = dueDateTime.toLocalDate();
             LocalDate currentDate = currentDateTime.toLocalDate();
@@ -80,16 +71,15 @@ public class EventController {
             LocalTime dueTime = dueDateTime.toLocalTime();
             LocalTime currentTime = currentDateTime.toLocalTime();
 
-            //Days/Months between the two dates
+            //Days, months and years between the two dates
             Period period = Period.between(currentDate, dueDate);
-            int daysLeft = period.getDays();
-            int monthsLeft = period.getMonths();
-            int yearsLeft = period.getYears();
-
+            Integer daysLeft = period.getDays();
+            Integer monthsLeft = period.getMonths();
+            Integer yearsLeft = period.getYears();
 
             //Time between two times
-            int hours = dueTime.getHour() - currentTime.getHour();
-            int minutes = dueTime.getMinute() - currentTime.getMinute();
+            Integer hours = dueTime.getHour() - currentTime.getHour();
+            Integer minutes = dueTime.getMinute() - currentTime.getMinute();
 
             if (hours < 0) {
                 hours = 24 + hours;
@@ -111,5 +101,56 @@ public class EventController {
 
             timeLeftField.setText(timeLeftString);
         }
+    }
+
+    /**
+     * Used to get the event title.
+     *
+     * @return The event title.
+     */
+    public String getEventTitle() {
+        return eventTitle.getText();
+    }
+
+    /**
+     * Used to set the event title.
+     *
+     * @param text The event title.
+     */
+    public void setTitle(String text) {
+        eventTitle.setText(text);
+    }
+
+    /**
+     * Used to set the event ID.
+     *
+     * @param eventId The event ID.
+     */
+    public void setEventID(int eventId) {
+        eventID = eventId;
+    }
+
+    /**
+     * Used to set the Due date.
+     *
+     * @param date The due date.
+     */
+    public void setDueDate(LocalDate date) {
+        dueDate = date;
+        Integer day = date.getDayOfMonth();
+        Integer month = date.getMonthValue();
+        Integer year = date.getYear();
+        String theDate = "";
+        theDate = theDate.concat(day + "/" + month + "/" + year);
+        dateDueField.setText(theDate);
+    }
+
+    /**
+     * Used to get the due date.
+     *
+     * @return The due date.
+     */
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 }
