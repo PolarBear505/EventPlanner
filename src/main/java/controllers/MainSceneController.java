@@ -57,7 +57,6 @@ public class MainSceneController  {
     @FXML
     public void buttonPressed(ActionEvent event) throws Exception {
         Stage stage;
-        Parent root;
 
         // Opens the pop up if the new event button is pressed
         if (event.getSource() == newEventButton) {
@@ -71,6 +70,7 @@ public class MainSceneController  {
             stage.setTitle("New Event");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(newEventButton.getScene().getWindow());
+            stage.setResizable(false);
             stage.showAndWait();
         } else {
             stage=(Stage)newEventButton.getScene().getWindow();

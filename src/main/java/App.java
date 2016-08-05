@@ -29,7 +29,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Window sizes
-        Integer width = 400;
+        Integer width = 470;
         Integer height = 600;
 
         // Set up the scene
@@ -45,6 +45,7 @@ public class App extends Application {
         primaryStage.setWidth(width);
         primaryStage.setMinHeight(height);
         primaryStage.setMinWidth(width);
+        primaryStage.setMaxWidth(width);
         primaryStage.show();
     }
 }
