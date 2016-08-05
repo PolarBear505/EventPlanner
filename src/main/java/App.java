@@ -40,7 +40,7 @@ public class App extends Application {
 
         // Set up and show the stage
         primaryStage.setScene(scene);
-        primaryStage.setTitle("EventPlanner");
+        primaryStage.setTitle("Event Planner");
         primaryStage.setHeight(height);
         primaryStage.setWidth(width);
         primaryStage.setMinHeight(height);
