@@ -1,3 +1,4 @@
+import controllers.MainSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -50,5 +51,6 @@ public class App extends Application {
         primaryStage.show();
 
         EventPersistence.loadEvents();
+        MainSceneController.getInstance().refreshEvents();
     }
 }

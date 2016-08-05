@@ -85,7 +85,7 @@ public final class EventPersistence {
                     String date = element.getElementsByTagName("Date").item(0).getTextContent();
                     LocalDate localDate = LocalDate.parse(date);
 
-                    MainSceneController.getInstance().addEvent(title, localDate);
+                    MainSceneController.getInstance().addEventToScene(title, localDate);
                 }
             }
         } catch (Exception e) {

@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import persistence.EventPersistence;
 
@@ -82,7 +83,7 @@ public class MainSceneController  {
     /**
      * Used to add an event to the main scene.
      */
-    public void addEvent(String eventTitle, LocalDate dueDate) {
+    public void addEventToScene(String eventTitle, LocalDate dueDate) {
         try {
             // Create the event
             Pane newPane = FXMLLoader.load(getClass().getResource("/Event.fxml"));
@@ -101,6 +102,7 @@ public class MainSceneController  {
             newPane.prefWidthProperty().bind(scrollPane.widthProperty());
             scrollPane.setContent(contentBox);
 
+            // Save the events to xml
             EventPersistence.saveEvents(eventsMap);
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,14 +123,20 @@ public class MainSceneController  {
     }
 
     /**
-     * Function used to refresh events.
+     * Adds all events to a sorted map, the re-loads them into the scene.
      */
     public void refreshEvents() {
+        Map<Integer, EventController> treeMap = new TreeMap<>();
         Collection<EventController> allEvents = eventsMap.values();
+
+        for (EventController event : allEvents) {
+            treeMap.put(event.getDateLengthValue(), event);
+        }
+
         eventsMap = new HashMap<>();
         contentBox = new VBox();
-        for (EventController event : allEvents) {
-            addEvent(event.getEventTitle(), event.getDueDate());
+        for (EventController event : treeMap.values()) {
+            addEventToScene(event.getEventTitle(), event.getDueDate());
         }
         scrollPane.setContent(contentBox);
     }

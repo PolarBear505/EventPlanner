@@ -19,6 +19,7 @@ public class EventController {
 
     private Integer eventID;
     private LocalDate dueDate;
+    private Integer dateLengthValue;
 
     @FXML private Text eventTitle;
     @FXML private Button deleteButton;
@@ -98,8 +99,16 @@ public class EventController {
             if (daysLeft > 0) timeLeftString = timeLeftString.concat(daysLeft + " Days ");
             if (hours > 0) timeLeftString = timeLeftString.concat(hours + " Hours ");
             if (minutes > 0) timeLeftString = timeLeftString.concat(minutes + " Minutes");
-
             timeLeftField.setText(timeLeftString);
+
+            // Creates an integer value of time left
+            Integer timeLeftInteger = 0;
+            timeLeftInteger += minutes;
+            timeLeftInteger += hours * 60;
+            timeLeftInteger += daysLeft * 24 * 60;
+            timeLeftInteger += monthsLeft * 28 * 24 * 60;
+            timeLeftInteger += yearsLeft * 12 * 28 * 24 * 60;
+            dateLengthValue = timeLeftInteger;
         }
     }
 
@@ -152,5 +161,14 @@ public class EventController {
      */
     public LocalDate getDueDate() {
         return dueDate;
+    }
+
+    /**
+     * Used to get the date length value.
+     *
+     * @return The date length value.
+     */
+    public Integer getDateLengthValue() {
+        return dateLengthValue;
     }
 }
