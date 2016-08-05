@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import persistence.EventPersistence;
 
 import java.net.URL;
 
@@ -47,5 +48,7 @@ public class App extends Application {
         primaryStage.setMinWidth(width);
         primaryStage.setMaxWidth(width);
         primaryStage.show();
+
+        EventPersistence.loadEvents();
     }
 }

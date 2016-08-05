@@ -3,7 +3,6 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,6 +17,8 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import persistence.EventPersistence;
 
 /**
  * Controller for the main scene.
@@ -99,6 +100,8 @@ public class MainSceneController  {
             contentBox.getChildren().addAll(newPane);
             newPane.prefWidthProperty().bind(scrollPane.widthProperty());
             scrollPane.setContent(contentBox);
+
+            EventPersistence.saveEvents(eventsMap);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,5 +140,6 @@ public class MainSceneController  {
      */
     public void removeEventFromMap(Integer idNumber) {
         eventsMap.remove(idNumber);
+        EventPersistence.saveEvents(eventsMap);
     }
 }
