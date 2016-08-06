@@ -2,13 +2,17 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
+import java.util.Optional;
 
 /**
  * Controller class for an event.
@@ -50,8 +54,29 @@ public class EventController {
     @FXML
     public void buttonPressed(ActionEvent event) {
         if(event.getSource() == deleteButton) {
-            MainSceneController.getInstance().removeEventFromMap(eventID);
-            MainSceneController.getInstance().refreshEvents();
+            // Create the alert
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Event");
+            alert.setHeaderText("Are you sure you want to delete the event?");
+            alert.setContentText("This cannot be undone");
+
+            // Create the button types
+            ButtonType confirmButtonType = new ButtonType("Yes");
+            ButtonType cancelButtonType = new ButtonType("Cancel");
+            alert.getButtonTypes().setAll(confirmButtonType, cancelButtonType);
+
+            // Set default buttons
+            Button yesButton = (Button) alert.getDialogPane().lookupButton( confirmButtonType );
+            yesButton.setDefaultButton( false );
+            Button cancelButton = (Button) alert.getDialogPane().lookupButton( cancelButtonType );
+            cancelButton.setDefaultButton( true );
+
+            // Display dialog and check result
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == confirmButtonType){
+                MainSceneController.getInstance().removeEventFromMap(eventID);
+                MainSceneController.getInstance().refreshEvents();
+            }
         }
     }
 
