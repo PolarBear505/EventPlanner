@@ -31,7 +31,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Window sizes
-        Integer width = 470;
+        Integer width = 480;
         Integer height = 600;
 
         // Set up the scene

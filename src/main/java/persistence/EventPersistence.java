@@ -21,17 +21,20 @@ import java.util.Map;
  */
 public final class EventPersistence {
 
+    private static String userHome = System.getProperty("user.home");
+
     /**
      * Used to save events to an xml document.
      *
      * @param eventsMap A map of all events.
      */
     public static void saveEvents(Map<Integer, EventController> eventsMap) {
+        File homeFile = new File(System.getProperty("user.home"));
 
-        File file = new File("/Saved Events");
+        File file = new File(homeFile, "/Saved Events");
 
         if (!(file.exists() && file.isDirectory())) {
-            new File("/Saved Events").mkdir();
+            new File(homeFile, "/Saved Events").mkdir();
         }
 
         try {
@@ -67,7 +70,7 @@ public final class EventPersistence {
      */
     public static void loadEvents() {
         try {
-            File eventsFile = new File("/Saved Events/events.xml");
+            File eventsFile = new File(userHome, "/Saved Events/events.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
             Document doc = documentBuilder.parse(eventsFile);
