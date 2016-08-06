@@ -21,30 +21,30 @@
             <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="443.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="5" />
-            <Text fx:id="eventTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" translateX="20.0" wrappingWidth="346.13671875" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7d7d7" height="110.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="3.0" width="443.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="5" />
+            <Text fx:id="eventTitle" fill="#3c3f40" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" translateX="20.0" wrappingWidth="346.13671875" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Bold Italic" size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Due Date:" translateX="20.0" wrappingWidth="98.13671875" GridPane.rowIndex="2">
+            <Text fill="#3c3f40" strokeType="OUTSIDE" strokeWidth="0.0" text="Due Date:" translateX="20.0" wrappingWidth="98.13671875" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
             <Text fx:id="dateDueField" strokeType="OUTSIDE" strokeWidth="0.0" text="Due Date" wrappingWidth="325.13671875" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font name="System Italic" size="16.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left:" translateX="20.0" wrappingWidth="98.13671875" GridPane.rowIndex="3">
+            <Text fill="#3c3f40" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left:" translateX="20.0" wrappingWidth="98.13671875" GridPane.rowIndex="3">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
             <Text fx:id="timeLeftField" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left" wrappingWidth="325.13671875" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
-                  <Font name="System Italic" size="16.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="20.0" text="Delete" translateX="-20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
