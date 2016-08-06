@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,8 @@ public class MainSceneController  {
 
     private static MainSceneController mainSceneController;
 
-    public static Map<Integer, EventController> eventsMap = new HashMap<>();
+    private static Map<Integer, EventController> eventsMap = new HashMap<>();
+    private Boolean refreshTimeLeft = true;
 
     @FXML private ScrollPane scrollPane;
     @FXML private VBox contentBox = new VBox();
@@ -45,6 +47,39 @@ public class MainSceneController  {
      */
     public static MainSceneController getInstance() {
         return mainSceneController;
+    }
+
+    /**
+     * Starts a new thread that refreshes the events time left field every 10 seconds.
+     */
+    public void startEventCountdown() {
+        // Thread creation
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (refreshTimeLeft) {
+                        // Recalculate the time left
+                        for (EventController event : eventsMap.values()) {
+                            event.calculateTimeLeft();
+                        }
+
+                        // Wait 10 seconds
+                        Thread.sleep(10000);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
+    /**
+     * Quit the application.
+     */
+    public void quitApp() {
+        refreshTimeLeft = false;
+        Platform.exit();
     }
 
     /**

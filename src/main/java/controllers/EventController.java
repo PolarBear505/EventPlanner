@@ -124,6 +124,7 @@ public class EventController {
             if (daysLeft > 0) timeLeftString = timeLeftString.concat(daysLeft + " Days ");
             if (hours > 0) timeLeftString = timeLeftString.concat(hours + " Hours ");
             if (minutes > 0) timeLeftString = timeLeftString.concat(minutes + " Minutes");
+
             timeLeftField.setText(timeLeftString);
 
             // Creates an integer value of time left

@@ -1,9 +1,11 @@
 import controllers.MainSceneController;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import persistence.EventPersistence;
 
 import java.net.URL;
@@ -50,7 +52,15 @@ public class App extends Application {
         primaryStage.setMaxWidth(width);
         primaryStage.show();
 
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                MainSceneController.getInstance().quitApp();
+            }
+        });
+
         EventPersistence.loadEvents();
         MainSceneController.getInstance().refreshEvents();
+        MainSceneController.getInstance().startEventCountdown();
     }
 }
