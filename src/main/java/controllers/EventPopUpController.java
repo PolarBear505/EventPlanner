@@ -61,18 +61,23 @@ public class EventPopUpController {
             LocalDate currentDate = LocalDate.now();
 
             // Sorts the time data from the pop up
-            Integer firstTimeValue = 0;
-            Integer secondTimeValue = 0;
+            Integer hour = 0;
+            Integer minute = 0;
             Boolean firstTimeBool = checkValidTime(firstTimeInput.getText(), 12);
             Boolean secondTimeBool = checkValidTime(secondTimeInput.getText(), 59);
             String timeType = timeTypeDropDown.getSelectionModel().getSelectedItem().toString();
-            if (firstTimeBool && secondTimeBool) {
-                firstTimeValue = Integer.parseInt(firstTimeInput.getText());
-                secondTimeValue = Integer.parseInt(secondTimeInput.getText());
 
-                if (timeType.equals("PM")) firstTimeValue += 12;
+            // Calculate the hour and minute values
+            if (firstTimeBool && secondTimeBool) {
+                hour = Integer.parseInt(firstTimeInput.getText());
+                minute = Integer.parseInt(secondTimeInput.getText());
+
+                if (timeType.equals("AM") && hour == 12) hour = 0;
+                if (timeType.equals("PM") && minute > 0) hour += 12;
+                if (hour == 24) hour = 0;
             }
-            LocalTime eventTime = LocalTime.of(firstTimeValue, secondTimeValue);
+            String dateString = String.format("%02d", hour) + ":" + String.format("%02d", minute);
+            LocalTime eventTime = LocalTime.parse(dateString);
             LocalTime currentTime = LocalTime.now();
 
             // Checks if values have been entered in the pop up fields
@@ -121,7 +126,7 @@ public class EventPopUpController {
             return false;
         }
 
-        return (value > 0 && value <= maxValue);
+        return (value >= 0 && value <= maxValue);
     }
 
     /**
@@ -160,17 +165,17 @@ public class EventPopUpController {
     public void setTimeFields(LocalTime time) {
         Integer hour = time.getHour();
         Integer minute = time.getMinute();
-        String timeType = "AM";
+        Integer timeType = 0;
 
         if (hour >= 12) {
             hour -= 12;
-            timeType = "PM";
+            timeType = 1;
             if (hour == 0) hour = 12;
         }
 
-        firstTimeInput.setText(String.valueOf(hour));
-        secondTimeInput.setText(String.valueOf(minute));
-        timeTypeDropDown.setValue(timeType);
+        firstTimeInput.setText(String.format("%02d", hour));
+        secondTimeInput.setText(String.format("%02d", minute));
+        timeTypeDropDown.getSelectionModel().select(timeType.intValue());
     }
 
     /**
