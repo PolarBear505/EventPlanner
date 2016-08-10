@@ -171,6 +171,8 @@ public class MainSceneController  {
                     value++;
                 }
 
+                System.out.println(event.getEventTitle());
+                System.out.println(value);
                 // Add to tree map
                 treeMap.put(value, event);
             }

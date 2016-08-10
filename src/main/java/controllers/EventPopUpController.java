@@ -74,7 +74,7 @@ public class EventPopUpController {
 
                 if (timeType.equals("AM") && hour == 12) hour = 0;
                 if (timeType.equals("PM") && minute > 0) hour += 12;
-                if (hour == 24) hour = 0;
+                if (hour == 24) hour = 12;
             }
             String dateString = String.format("%02d", hour) + ":" + String.format("%02d", minute);
             LocalTime eventTime = LocalTime.parse(dateString);

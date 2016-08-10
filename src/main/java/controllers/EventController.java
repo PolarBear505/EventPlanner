@@ -152,10 +152,11 @@ public class EventController {
             if (minutes > 0) timeLeftString = timeLeftString.concat(minutes + " Minutes");
 
             // Creates an integer value of time left
-            Integer timeLeftInteger = ((minutes * 1000) + (hours * 60 * 1000));
-            timeLeftInteger += daysLeft * 24 * 60 * 1000;
-            timeLeftInteger += monthsLeft * 28 * 24 * 60 * 1000;
-            timeLeftInteger += yearsLeft * 12 * 28 * 24 * 60 * 1000;
+            Integer timeLeftInteger = minutes + (hours * 60);
+            timeLeftInteger += daysLeft * 24 * 60;
+            timeLeftInteger += monthsLeft * 28 * 24 * 60;
+            timeLeftInteger += yearsLeft * 12 * 28 * 24 * 60;
+            timeLeftInteger += timeLeftInteger * 1000;
 
             // Sets the two variables
             dateLengthValue = timeLeftInteger;
