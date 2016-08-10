@@ -1,44 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="196.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventPopUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="211.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventPopUpController">
    <children>
-      <GridPane layoutX="109.0" layoutY="-31.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="109.0" layoutY="-31.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="172.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="220.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="12.0" prefHeight="12.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Event" translateX="20.0" wrappingWidth="186.13671875">
+            <Text fill="#3c3f40" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a New Event" wrappingWidth="377.13671875">
                <font>
-                  <Font name="System Bold Italic" size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title*" translateX="20.0" wrappingWidth="123.13671875" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Event Date*" translateX="20.0" wrappingWidth="108.13671875" GridPane.rowIndex="2">
+            <Text fill="#3c3f40" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" wrappingWidth="155.13671875" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="titleInputField" maxWidth="180.0" prefHeight="25.0" prefWidth="180.0" translateX="-20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <DatePicker fx:id="dateInput" maxWidth="180.0" prefHeight="25.0" prefWidth="180.0" translateX="-20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="25.0" prefWidth="80.0" text="Cancel" translateX="-120.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="25.0" prefWidth="80.0" text="Accept" translateX="-20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Text fx:id="emptyFieldText" fill="#fc0000" strokeType="OUTSIDE" strokeWidth="0.0" translateX="20.0" GridPane.rowIndex="3">
+            <Text fill="#3c3f40" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Date" wrappingWidth="154.13671875" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="titleInputField" maxWidth="230.0" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
+            <DatePicker fx:id="dateInput" maxWidth="222.0" prefHeight="25.0" prefWidth="222.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="25.0" prefWidth="80.0" text="Cancel" translateX="-92.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="25.0" prefWidth="80.0" text="Accept" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Text fx:id="emptyFieldText" fill="#fc0000" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="206.3583984375" GridPane.rowIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#3c3f40" layoutX="10.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Time" wrappingWidth="155.13671875" GridPane.rowIndex="4">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="timeTypeDropDown" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="AM" />
+                        <String fx:value="PM" />
+                    </FXCollections>
+                </items>
+                <value>
+                    <String fx:value="AM" />
+                </value>
+            </ChoiceBox>
+            <TextField fx:id="firstTimeInput" layoutX="216.0" layoutY="43.0" maxWidth="63.0" minWidth="63.0" prefHeight="25.0" prefWidth="63.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="secondTimeInput" layoutX="216.0" layoutY="103.0" maxWidth="63.0" minWidth="63.0" prefHeight="25.0" prefWidth="63.0" translateX="76.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" translateX="68.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="18.0" />
                </font>

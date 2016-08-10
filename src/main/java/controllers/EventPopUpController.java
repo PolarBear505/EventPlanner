@@ -32,9 +32,16 @@ public class EventPopUpController {
             // Gets the data from the pop up
             String eventName = titleInputField.getText();
             LocalDate eventDate = dateInput.getValue();
+            LocalDate currentDate = LocalDate.now();
 
             // Checks if values have been entered in the pop up fields
-            if (!eventName.equals("") && eventDate != null) {
+            if (eventName.equals("")) {
+                emptyFieldText.setText("Valid title required!");
+            } else if (eventDate == null) {
+                emptyFieldText.setText("Valid date required!");
+            } else if (!eventDate.isAfter(currentDate)  && !eventDate.equals(currentDate)) {
+                emptyFieldText.setText("Date must be after current date!");
+            } else {
                 // Closes the pop up
                 stage=(Stage)acceptButton.getScene().getWindow();
                 stage.close();
@@ -42,8 +49,6 @@ public class EventPopUpController {
                 // Tells the main scene controller to add the event
                 MainSceneController.getInstance().addEventToScene(eventName, eventDate);
                 MainSceneController.getInstance().refreshEvents();
-            } else {
-                emptyFieldText.setText("Title and date required!");
             }
         } else {
             stage=(Stage)acceptButton.getScene().getWindow();
