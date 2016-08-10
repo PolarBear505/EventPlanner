@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Map;
 
 /**
@@ -47,9 +48,13 @@ public final class EventPersistence {
                 Element child2 = new Element("Date");
                 child2.addContent(event.getDueDate().toString());
 
+                Element child3 = new Element("Time");
+                child3.addContent(event.getDueTime().toString());
+
                 Element eventElement = new Element("Event");
                 eventElement.addContent(child1);
                 eventElement.addContent(child2);
+                eventElement.addContent(child3);
 
                 root.addContent(eventElement);
             }
@@ -86,9 +91,20 @@ public final class EventPersistence {
 
                     String title = element.getElementsByTagName("Title").item(0).getTextContent();
                     String date = element.getElementsByTagName("Date").item(0).getTextContent();
-                    LocalDate localDate = LocalDate.parse(date);
 
-                    MainSceneController.getInstance().addEventToScene(title, localDate);
+                    // Try parse the time
+                    String time = "12:00";
+                    try {
+                        time = element.getElementsByTagName("Time").item(0).getTextContent();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    // Convert date and time
+                    LocalDate localDate = LocalDate.parse(date);
+                    LocalTime localTime = LocalTime.parse(time);
+
+                    MainSceneController.getInstance().addEventToScene(title, localDate, localTime);
                 }
             }
         } catch (Exception e) {

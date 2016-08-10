@@ -71,7 +71,7 @@ public class EventPopUpController {
                 stage.close();
 
                 // Tells the main scene controller to add the event
-                MainSceneController.getInstance().addEventToScene(eventName, eventDate);
+                MainSceneController.getInstance().addEventToScene(eventName, eventDate, eventTime);
                 MainSceneController.getInstance().refreshEvents();
             }
         } else {

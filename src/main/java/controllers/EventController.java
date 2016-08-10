@@ -22,6 +22,7 @@ public class EventController {
 
     private Integer eventID;
     private LocalDate dueDate;
+    private LocalTime dueTime;
     private Integer dateLengthValue;
 
     @FXML private Text eventTitle;
@@ -165,18 +166,35 @@ public class EventController {
     }
 
     /**
-     * Used to set the Due date.
+     * Used to set the due date and time.
      *
      * @param date The due date.
+     * @param time The due time.
      */
-    public void setDueDate(LocalDate date) {
+    public void setDueDateAndTime(LocalDate date, LocalTime time) {
         dueDate = date;
+        dueTime = time;
+        String fieldText = "";
+
+        // Date fields
         Integer day = date.getDayOfMonth();
         Integer month = date.getMonthValue();
         Integer year = date.getYear();
-        String theDate = "";
-        theDate = theDate.concat(day + "/" + month + "/" + year);
-        dateDueField.setText(theDate);
+        fieldText = fieldText.concat(day + "/" + month + "/" + year);
+
+        // Time fields
+        Integer hour = time.getHour();
+        Integer minute = time.getMinute();
+        String timeType = "AM";
+        if (hour > 12) {
+            hour -= 12;
+            timeType = "PM";
+        }
+
+        fieldText = fieldText.concat(" " + String.format("%02d", hour)
+                + ":" + String.format("%02d", minute) + " " + timeType);
+
+        dateDueField.setText(fieldText);
     }
 
     /**
@@ -186,6 +204,15 @@ public class EventController {
      */
     public LocalDate getDueDate() {
         return dueDate;
+    }
+
+    /**
+     * Used to get the due time.
+     *
+     * @return The due time.
+     */
+    public LocalTime getDueTime() {
+        return dueTime;
     }
 
     /**
