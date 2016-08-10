@@ -9,6 +9,5 @@ Features in progress:
 * Event descriptions
 * Dynaminc event colouring
 * Prettier UI
-* Event time picker
 * Event groups
 * More features coming....
