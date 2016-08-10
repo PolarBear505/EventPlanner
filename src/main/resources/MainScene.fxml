@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -8,7 +7,7 @@
    <children>
       <StackPane layoutY="40.0" prefHeight="460.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <children>
-            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="-Infinity" prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #000000;" vbarPolicy="ALWAYS" />
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="-Infinity" prefHeight="350.0" prefWidth="600.0" vbarPolicy="ALWAYS" />
          </children>
       </StackPane>
       <ToolBar prefHeight="40.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

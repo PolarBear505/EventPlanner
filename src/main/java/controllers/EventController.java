@@ -2,11 +2,17 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
@@ -26,6 +32,7 @@ public class EventController {
 
     @FXML private Text eventTitle;
     @FXML private Button deleteButton;
+    @FXML private Button editButton;
     @FXML private Text dateDueField;
     @FXML private Text timeLeftField;
 
@@ -51,7 +58,7 @@ public class EventController {
      * @param event The action event.
      */
     @FXML
-    public void buttonPressed(ActionEvent event) {
+    public void buttonPressed(ActionEvent event) throws Exception {
         if(event.getSource() == deleteButton) {
             // Create the alert
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -76,6 +83,26 @@ public class EventController {
                 MainSceneController.getInstance().removeEventFromMap(eventID);
                 MainSceneController.getInstance().refreshEvents();
             }
+        } else if (event.getSource() == editButton) {
+            Stage stage = new Stage();
+            URL url = getClass().getResource("/NewEventPopUp.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            AnchorPane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+
+            stage.setScene(scene);
+            stage.setTitle("Edit Event");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(editButton.getScene().getWindow());
+            stage.setResizable(false);
+
+            EventPopUpController.getInstance().setWindowTitle("Edit Event");
+            EventPopUpController.getInstance().setTitleFieldText(eventTitle.getText());
+            EventPopUpController.getInstance().setDateField(dueDate);
+            EventPopUpController.getInstance().setTimeFields(dueTime);
+            EventPopUpController.getInstance().setEventID(eventID);
+
+            stage.showAndWait();
         }
     }
 
@@ -188,9 +215,10 @@ public class EventController {
         Integer hour = time.getHour();
         Integer minute = time.getMinute();
         String timeType = "AM";
-        if (hour > 12) {
+        if (hour >= 12) {
             hour -= 12;
             timeType = "PM";
+            if (hour == 0) hour = 12;
         }
 
         fieldText = fieldText.concat(" " + String.format("%02d", hour)

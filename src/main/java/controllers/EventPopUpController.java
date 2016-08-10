@@ -17,13 +17,34 @@ import java.time.LocalTime;
  */
 public class EventPopUpController {
 
+    private static EventPopUpController eventPopUpController;
+
     @FXML private TextField titleInputField;
     @FXML private Button acceptButton;
     @FXML private DatePicker dateInput;
     @FXML private Text emptyFieldText;
+    @FXML private Text titleText;
     @FXML private TextField firstTimeInput;
     @FXML private TextField secondTimeInput;
     @FXML private ChoiceBox timeTypeDropDown;
+
+    private Integer givenEventID = null;
+
+    /**
+     * Constructor for class.
+     */
+    public EventPopUpController() {
+        eventPopUpController = this;
+    }
+
+    /**
+     * Used to get the instance of the event pop up controller.
+     *
+     * @return The event pop up controller.
+     */
+    public static EventPopUpController getInstance() {
+        return eventPopUpController;
+    }
 
     /**
      * Handles any button being pressed on the pop up.
@@ -71,6 +92,9 @@ public class EventPopUpController {
                 stage.close();
 
                 // Tells the main scene controller to add the event
+                if (givenEventID != null) {
+                    MainSceneController.getInstance().removeEventFromMap(givenEventID);
+                }
                 MainSceneController.getInstance().addEventToScene(eventName, eventDate, eventTime);
                 MainSceneController.getInstance().refreshEvents();
             }
@@ -98,5 +122,63 @@ public class EventPopUpController {
         }
 
         return (value > 0 && value <= maxValue);
+    }
+
+    /**
+     * Used to set the title text on the pop up.
+     *
+     * @param title The title text.
+     */
+    public void setWindowTitle(String title) {
+        titleText.setText(title);
+    }
+
+    /**
+     * Used to set the title input field text.
+     *
+     * @param text The input field text.
+     */
+    public void setTitleFieldText(String text) {
+        titleInputField.setText(text);
+    }
+
+    /**
+     * Used to set the date field.
+     *
+     * @param date The date.
+     */
+    public void setDateField(LocalDate date) {
+        dateInput.setValue(date);
+    }
+
+    /**
+     * Used to set the time field.
+     *
+     * @param time The time.
+     */
+    @SuppressWarnings("Duplicates")
+    public void setTimeFields(LocalTime time) {
+        Integer hour = time.getHour();
+        Integer minute = time.getMinute();
+        String timeType = "AM";
+
+        if (hour >= 12) {
+            hour -= 12;
+            timeType = "PM";
+            if (hour == 0) hour = 12;
+        }
+
+        firstTimeInput.setText(String.valueOf(hour));
+        secondTimeInput.setText(String.valueOf(minute));
+        timeTypeDropDown.setValue(timeType);
+    }
+
+    /**
+     * Used to set the event od of an event that is being edited.
+     *
+     * @param id The id.
+     */
+    public void setEventID(Integer id) {
+        givenEventID = id;
     }
 }
