@@ -8,7 +8,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 import java.util.Optional;
@@ -84,26 +83,26 @@ public class EventController {
      * Calculates the time left and adds it to the time left text field.
      */
     public void calculateTimeLeft() {
-        //The two local date times;
-        LocalDateTime dueDateTime = dueDate.atStartOfDay();
-        LocalDateTime currentDateTime = LocalDateTime.now();
+        // The current date and time
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
 
-        if (dueDateTime.isAfter(currentDateTime)) {
-            //The two local dates
-            LocalDate dueDate = dueDateTime.toLocalDate();
-            LocalDate currentDate = currentDateTime.toLocalDate();
+        // Boolean checks before calculating time
+        Boolean dateCheck = (dueDate.isAfter(currentDate) || dueDate.equals(currentDate));
+        Boolean timeCheck = true;
+        if (!dueTime.isAfter(currentTime) && dueDate.equals(currentDate)) {
+            timeCheck = false;
+        }
 
-            //The two local times
-            LocalTime dueTime = dueDateTime.toLocalTime();
-            LocalTime currentTime = currentDateTime.toLocalTime();
-
-            //Days, months and years between the two dates
+        // Calculates time if checks succeed
+        if (dateCheck && timeCheck) {
+            // Days, months and years between the two dates
             Period period = Period.between(currentDate, dueDate);
             Integer daysLeft = period.getDays();
             Integer monthsLeft = period.getMonths();
             Integer yearsLeft = period.getYears();
 
-            //Time between two times
+            // Hours and minutes between two times
             Integer hours = dueTime.getHour() - currentTime.getHour();
             Integer minutes = dueTime.getMinute() - currentTime.getMinute();
 
@@ -125,16 +124,19 @@ public class EventController {
             if (hours > 0) timeLeftString = timeLeftString.concat(hours + " Hours ");
             if (minutes > 0) timeLeftString = timeLeftString.concat(minutes + " Minutes");
 
-            timeLeftField.setText(timeLeftString);
-
             // Creates an integer value of time left
-            Integer timeLeftInteger = 0;
-            timeLeftInteger += minutes * 1000;
-            timeLeftInteger += hours * 60 * 1000;
+            Integer timeLeftInteger = ((minutes * 1000) + (hours * 60 * 1000));
             timeLeftInteger += daysLeft * 24 * 60 * 1000;
             timeLeftInteger += monthsLeft * 28 * 24 * 60 * 1000;
             timeLeftInteger += yearsLeft * 12 * 28 * 24 * 60 * 1000;
+
+            // Sets the two variables
             dateLengthValue = timeLeftInteger;
+            timeLeftField.setText(timeLeftString);
+        } else {
+            // Sets error variables if something goes wrong
+            dateLengthValue = 1;
+            timeLeftField.setText("Due date and time error!");
         }
     }
 
