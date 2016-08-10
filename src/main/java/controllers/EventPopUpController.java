@@ -170,8 +170,8 @@ public class EventPopUpController {
         if (hour >= 12) {
             hour -= 12;
             timeType = 1;
-            if (hour == 0) hour = 12;
         }
+        if (hour == 0) hour = 12;
 
         firstTimeInput.setText(String.format("%02d", hour));
         secondTimeInput.setText(String.format("%02d", minute));

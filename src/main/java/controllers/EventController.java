@@ -133,14 +133,14 @@ public class EventController {
             Integer hours = dueTime.getHour() - currentTime.getHour();
             Integer minutes = dueTime.getMinute() - currentTime.getMinute();
 
-            if (hours < 0) {
-                hours = 24 + hours;
-                daysLeft--;
-            }
-
             if (minutes < 0) {
                 minutes = 60 + minutes;
                 hours--;
+            }
+
+            if (hours < 0) {
+                hours = 24 + hours;
+                daysLeft--;
             }
 
             //Prepares the time left string
@@ -163,7 +163,7 @@ public class EventController {
         } else {
             // Sets error variables if something goes wrong
             dateLengthValue = 1;
-            timeLeftField.setText("Due date and time error!");
+            timeLeftField.setText("No Time Left!");
         }
     }
 
@@ -218,8 +218,8 @@ public class EventController {
         if (hour >= 12) {
             hour -= 12;
             timeType = "PM";
-            if (hour == 0) hour = 12;
         }
+        if (hour == 0) hour = 12;
 
         fieldText = fieldText.concat(" " + String.format("%02d", hour)
                 + ":" + String.format("%02d", minute) + " " + timeType);
