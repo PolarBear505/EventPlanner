@@ -222,7 +222,7 @@ public class EventController {
         }
         if (hour == 0) hour = 12;
 
-        fieldText = fieldText.concat(" " + String.format("%02d", hour)
+        fieldText = fieldText.concat(" at " + hour
                 + ":" + String.format("%02d", minute) + " " + timeType);
 
         dateDueField.setText(fieldText);
