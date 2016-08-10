@@ -164,13 +164,15 @@ public class MainSceneController  {
         for (EventController event : allEvents) {
             Integer value = event.getDateLengthValue();
 
-            // Ensures duplicates are accounted for
-            while (treeMap.containsKey(value)) {
-                value++;
-            }
+            if (value != null) {
+                // Ensures duplicates are accounted for
+                while (treeMap.containsKey(value)) {
+                    value++;
+                }
 
-            // Add to tree map
-            treeMap.put(value, event);
+                // Add to tree map
+                treeMap.put(value, event);
+            }
         }
 
         eventsMap = new HashMap<>();
