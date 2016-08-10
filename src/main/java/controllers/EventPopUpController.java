@@ -73,7 +73,7 @@ public class EventPopUpController {
                 minute = Integer.parseInt(secondTimeInput.getText());
 
                 if (timeType.equals("AM") && hour == 12) hour = 0;
-                if (timeType.equals("PM") && minute > 0) hour += 12;
+                if (timeType.equals("PM")) hour += 12;
                 if (hour == 24) hour = 12;
             }
             String dateString = String.format("%02d", hour) + ":" + String.format("%02d", minute);
