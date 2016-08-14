@@ -1,0 +1,7 @@
+.edit-button {
+    -fx-graphic: url("/icons/IconPencil.png");
+}
+
+.delete-button {
+    -fx-graphic: url("/icons/IconRemove.png");
+}

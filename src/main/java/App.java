@@ -41,6 +41,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(sceneUrl);
         AnchorPane pane = fxmlLoader.load();
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add("/stylesheets/stylesheet.css");
 
         // Set up and show the stage
         primaryStage.setScene(scene);
