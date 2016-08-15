@@ -1,7 +1,7 @@
 # **Event Planner**
 A simple application that lets you keep track of events.
 
-![Imgur](http://i.imgur.com/O3nzaHS.png)
+![Imgur](http://i.imgur.com/CCRT1Ps.png)
 
 Currently the application is still being worked on.
 
