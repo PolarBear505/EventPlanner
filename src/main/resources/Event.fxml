@@ -21,7 +21,7 @@
             <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7d7d7" height="110.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="3.0" width="443.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="5" />
+            <Rectangle fx:id="eventRectangle" arcHeight="5.0" arcWidth="5.0" fill="#d7d7d7" height="110.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="3.0" width="443.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="5" />
             <Text fx:id="eventTitle" fill="#3c3f40" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" translateX="12.0" wrappingWidth="346.13671875" GridPane.columnSpan="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="24.0" />

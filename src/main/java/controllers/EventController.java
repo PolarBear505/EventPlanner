@@ -8,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +39,7 @@ public class EventController {
     @FXML private Button doneButton;
     @FXML private Text dateDueField;
     @FXML private Text timeLeftField;
+    @FXML private Rectangle eventRectangle;
 
     /**
      * Constructor for the class.
@@ -170,13 +173,28 @@ public class EventController {
                 timeLeftField.setText(timeLeftString);
             } else {
                 dateLengthValue = 1;
-                timeLeftField.setText("Event Complete");
+                timeLeftField.setText("Event Completed");
             }
-
         } else {
             // Handles no time left
             dateLengthValue = 1;
-            timeLeftField.setText("No time left");
+            timeLeftField.setText("Time Expired");
+        }
+
+        Paint greenColourFill = Paint.valueOf("#b9f8b6");
+        Paint redColourFill = Paint.valueOf("#dd9d9d");
+        Paint yellowColourFill = Paint.valueOf("#fcffaa");
+
+        Integer noTimeLeftValue = 1000;
+        Integer threeDaysLeftValue = 4320000;
+
+        // Change the event colours based on the time left
+        if (dateLengthValue <= noTimeLeftValue) {
+            eventRectangle.setFill(greenColourFill);
+        } else if (dateLengthValue <= threeDaysLeftValue) {
+            eventRectangle.setFill(redColourFill);
+        } else {
+            eventRectangle.setFill(yellowColourFill);
         }
     }
 
