@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -55,6 +56,21 @@ public class EventController {
      */
     public static EventController getInstance() {
         return eventController;
+    }
+
+    /**
+     * The initialize method called after the class is constructed.
+     */
+    @FXML
+    public void initialize() {
+        // Create and set the tool tips
+        Tooltip doneButtonTooltip = new Tooltip("Mark event as complete");
+        Tooltip editButtonTooltip = new Tooltip("Edit event");
+        Tooltip deleteButtonTooltip = new Tooltip("Delete event");
+
+        doneButton.setTooltip(doneButtonTooltip);
+        editButton.setTooltip(editButtonTooltip);
+        deleteButton.setTooltip(deleteButtonTooltip);
     }
 
     /**
