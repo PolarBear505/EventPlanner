@@ -100,7 +100,8 @@ public class EventPopUpController {
                 if (givenEventID != null) {
                     MainSceneController.getInstance().removeEventFromMap(givenEventID);
                 }
-                MainSceneController.getInstance().addEventToScene(eventName, eventDate, eventTime);
+                MainSceneController.getInstance().addEventToScene(
+                        eventName, eventDate, eventTime, false);
                 MainSceneController.getInstance().refreshEvents();
             }
         } else {

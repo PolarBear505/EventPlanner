@@ -29,10 +29,12 @@ public class EventController {
     private LocalDate dueDate;
     private LocalTime dueTime;
     private Integer dateLengthValue;
+    private Boolean eventDone = false;
 
     @FXML private Text eventTitle;
     @FXML private Button deleteButton;
     @FXML private Button editButton;
+    @FXML private Button doneButton;
     @FXML private Text dateDueField;
     @FXML private Text timeLeftField;
 
@@ -103,6 +105,10 @@ public class EventController {
             EventPopUpController.getInstance().setEventID(eventID);
 
             stage.showAndWait();
+        } else if (event.getSource() == doneButton) {
+            eventDone = true;
+            calculateTimeLeft();
+            MainSceneController.getInstance().refreshEvents();
         }
     }
 
@@ -159,12 +165,18 @@ public class EventController {
             timeLeftInteger += timeLeftInteger * 1000;
 
             // Sets the two variables
-            dateLengthValue = timeLeftInteger;
-            timeLeftField.setText(timeLeftString);
+            if (!eventDone) {
+                dateLengthValue = timeLeftInteger;
+                timeLeftField.setText(timeLeftString);
+            } else {
+                dateLengthValue = 1;
+                timeLeftField.setText("Event Complete");
+            }
+
         } else {
-            // Sets error variables if something goes wrong
+            // Handles no time left
             dateLengthValue = 1;
-            timeLeftField.setText("No Time Left!");
+            timeLeftField.setText("No time left");
         }
     }
 
@@ -253,5 +265,23 @@ public class EventController {
      */
     public Integer getDateLengthValue() {
         return dateLengthValue;
+    }
+
+    /**
+     * Used to check if the event is done.
+     *
+     * @return A boolean value.
+     */
+    public Boolean eventDone() {
+        return eventDone;
+    }
+
+    /**
+     * Used to set the event done field.
+     *
+     * @param value A boolean value.
+     */
+    public void setEventDone(Boolean value) {
+        eventDone = value;
     }
 }

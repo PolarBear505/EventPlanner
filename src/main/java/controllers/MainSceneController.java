@@ -116,7 +116,9 @@ public class MainSceneController  {
     /**
      * Used to add an event to the main scene.
      */
-    public void addEventToScene(String eventTitle, LocalDate dueDate, LocalTime time) {
+    public void addEventToScene(
+            String eventTitle, LocalDate dueDate, LocalTime time, Boolean eventDone) {
+
         try {
             // Create the event
             Pane newPane = FXMLLoader.load(getClass().getResource("/Event.fxml"));
@@ -127,6 +129,7 @@ public class MainSceneController  {
             event.setEventID(eventID);
             event.setTitle(eventTitle);
             event.setDueDateAndTime(dueDate, time);
+            event.setEventDone(eventDone);
             event.calculateTimeLeft();
 
             // Add event to scroll pane
@@ -179,7 +182,8 @@ public class MainSceneController  {
         eventsMap = new HashMap<>();
         contentBox = new VBox();
         for (EventController event : treeMap.values()) {
-            addEventToScene(event.getEventTitle(), event.getDueDate(), event.getDueTime());
+            addEventToScene(event.getEventTitle(),
+                    event.getDueDate(), event.getDueTime(), event.eventDone());
         }
         scrollPane.setContent(contentBox);
     }

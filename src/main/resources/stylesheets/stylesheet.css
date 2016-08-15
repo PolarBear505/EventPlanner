@@ -3,5 +3,9 @@
 }
 
 .delete-button {
-    -fx-graphic: url("/icons/IconRemove.png");
+    -fx-graphic: url("/icons/IconDelete.png");
+}
+
+.done-button {
+    -fx-graphic: url("/icons/IconDone.png");
 }

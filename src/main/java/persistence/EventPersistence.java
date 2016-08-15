@@ -51,10 +51,14 @@ public final class EventPersistence {
                 Element child3 = new Element("Time");
                 child3.addContent(event.getDueTime().toString());
 
+                Element child4 = new Element("Finished");
+                child4.addContent(event.eventDone().toString());
+
                 Element eventElement = new Element("Event");
                 eventElement.addContent(child1);
                 eventElement.addContent(child2);
                 eventElement.addContent(child3);
+                eventElement.addContent(child4);
 
                 root.addContent(eventElement);
             }
@@ -100,11 +104,23 @@ public final class EventPersistence {
                         e.printStackTrace();
                     }
 
+                    String eventFinished = "false";
+                    Boolean eventDoneBool = false;
+                    try {
+                        eventFinished =
+                                element.getElementsByTagName("Finished").item(0).getTextContent();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (eventFinished.equals("true")) eventDoneBool = true;
+
                     // Convert date and time
                     LocalDate localDate = LocalDate.parse(date);
                     LocalTime localTime = LocalTime.parse(time);
 
-                    MainSceneController.getInstance().addEventToScene(title, localDate, localTime);
+                    MainSceneController.getInstance()
+                            .addEventToScene(title, localDate, localTime, eventDoneBool);
                 }
             }
         } catch (Exception e) {
